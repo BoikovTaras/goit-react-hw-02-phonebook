@@ -44,12 +44,17 @@ class App extends Component {
     this.setState({ filter: e.currentTarget.value });
   };
 
+  FilteredContacts = () => {
+    const { filter, contacts } = this.state;
+    const normFilter = filter.toLowerCase();
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normFilter),
+    );
+  };
+
   render() {
     const { contacts, filter, name, number } = this.state;
-    const normFilter = this.state.filter;
-    const filteredContacts = this.state.contacts.name.filter(names =>
-      names.text.includes(normFilter),
-    );
+    const filteredContacts = this.FilteredContacts();
     return (
       <div>
         <Title title="Phonebook" />
@@ -62,7 +67,7 @@ class App extends Component {
         />
         <Title title="Contacts" />
         <Filter value={filter} onChange={this.FilterContact} />
-        <Contacts contacts={contacts} />
+        <Contacts contacts={filteredContacts} />
       </div>
     );
   }
