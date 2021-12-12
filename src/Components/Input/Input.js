@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import { nanoid } from 'nanoid';
 import s from './Input.module.css';
 
@@ -71,5 +73,10 @@ class Input extends Component {
     );
   }
 }
+
+Input.propTypes = {
+  name: PropTypes.string,
+  number: PropTypes.number,
+};
 
 export default Input;

@@ -1,5 +1,6 @@
 // import { render } from '@testing-library/react';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import s from './App.module.css';
 
@@ -62,5 +63,9 @@ class App extends Component {
     );
   }
 }
+
+App.propTypes = {
+  filter: PropTypes.string,
+};
 
 export default App;

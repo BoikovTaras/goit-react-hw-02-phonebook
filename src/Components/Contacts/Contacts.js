@@ -1,5 +1,6 @@
 import React from 'react';
 import s from './Contacts.module.css';
+import PropTypes from 'prop-types';
 
 const Contacts = ({ contacts, deleteContact }) => {
   return (
@@ -19,6 +20,11 @@ const Contacts = ({ contacts, deleteContact }) => {
       ))}
     </ul>
   );
+};
+
+Contacts.propTypes = {
+  name: PropTypes.string,
+  number: PropTypes.number,
 };
 
 export default Contacts;
