@@ -1,11 +1,12 @@
 // import { render } from '@testing-library/react';
 import React, { Component } from 'react';
 
+import s from './App.module.css';
+
 import Input from './Components/Input/Input';
 import Title from './Components/Title/Title';
 import Contacts from './Components/Contacts/Contacts';
 import Filter from './Components/Filter/Filter';
-import { nanoid } from 'nanoid';
 
 class App extends Component {
   state = {
@@ -16,28 +17,20 @@ class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
-    name: '',
-    number: '',
-  };
-
-  AddContactName = event => {
-    this.setState({ name: event.currentTarget.value });
-  };
-
-  AddContactNumber = event => {
-    this.setState({ number: event.currentTarget.value });
   };
 
   AddContact = event => {
     this.setState(prevState => ({
-      contacts: [...prevState.contacts, this.RenderContact()],
-      name: '',
-      number: '',
+      contacts: [...prevState.contacts, event],
     }));
   };
 
-  RenderContact = () => {
-    return { id: nanoid(), name: this.state.name, number: this.state.number };
+  DeleteContact = e => {
+    this.setState({
+      contacts: this.state.contacts.filter(
+        item => item.id !== e.currentTarget.id,
+      ),
+    });
   };
 
   FilterContact = e => {
@@ -53,21 +46,18 @@ class App extends Component {
   };
 
   render() {
-    const { contacts, filter, name, number } = this.state;
+    const { contacts, filter } = this.state;
     const filteredContacts = this.FilteredContacts();
     return (
-      <div>
+      <div className={s.container}>
         <Title title="Phonebook" />
-        <Input
-          name={name}
-          number={number}
-          AddContactName={this.AddContactName}
-          AddContactNumber={this.AddContactNumber}
-          AddContact={this.AddContact}
-        />
+        <Input contacts={contacts} addContact={this.AddContact} />
         <Title title="Contacts" />
         <Filter value={filter} onChange={this.FilterContact} />
-        <Contacts contacts={filteredContacts} />
+        <Contacts
+          contacts={filteredContacts}
+          deleteContact={this.DeleteContact}
+        />
       </div>
     );
   }
