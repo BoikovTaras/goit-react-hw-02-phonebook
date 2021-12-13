@@ -1,13 +1,12 @@
-// import { render } from '@testing-library/react';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import s from './App.module.css';
 
-import Input from './Components/Input/Input';
-import Title from './Components/Title/Title';
-import Contacts from './Components/Contacts/Contacts';
-import Filter from './Components/Filter/Filter';
+import Input from './components/Input/Input';
+import Title from './components/Title/Title';
+import Contacts from './components/Contacts/Contacts';
+import Filter from './components/Filter/Filter';
 
 class App extends Component {
   state = {
@@ -20,25 +19,23 @@ class App extends Component {
     filter: '',
   };
 
-  AddContact = event => {
+  addContact = event => {
     this.setState(prevState => ({
       contacts: [...prevState.contacts, event],
     }));
   };
 
-  DeleteContact = e => {
+  deleteContact = id => {
     this.setState({
-      contacts: this.state.contacts.filter(
-        item => item.id !== e.currentTarget.id,
-      ),
+      contacts: this.state.contacts.filter(item => item.id !== id),
     });
   };
 
-  FilterContact = e => {
+  filterContact = e => {
     this.setState({ filter: e.currentTarget.value });
   };
 
-  FilteredContacts = () => {
+  filteredContacts = () => {
     const { filter, contacts } = this.state;
     const normFilter = filter.toLowerCase();
     return contacts.filter(contact =>
@@ -48,16 +45,16 @@ class App extends Component {
 
   render() {
     const { contacts, filter } = this.state;
-    const filteredContacts = this.FilteredContacts();
+    const filteredContacts = this.filteredContacts();
     return (
       <div className={s.container}>
         <Title title="Phonebook" />
-        <Input contacts={contacts} addContact={this.AddContact} />
+        <Input contacts={contacts} addContact={this.addContact} />
         <Title title="Contacts" />
-        <Filter value={filter} onChange={this.FilterContact} />
+        <Filter value={filter} onChange={this.filterContact} />
         <Contacts
           contacts={filteredContacts}
-          deleteContact={this.DeleteContact}
+          deleteContact={this.deleteContact}
         />
       </div>
     );

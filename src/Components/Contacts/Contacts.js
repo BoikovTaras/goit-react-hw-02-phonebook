@@ -12,7 +12,7 @@ const Contacts = ({ contacts, deleteContact }) => {
             className={s.delete}
             type="button"
             id={contact.id}
-            onClick={deleteContact}
+            onClick={() => deleteContact(contact.id)}
           >
             Delete
           </button>

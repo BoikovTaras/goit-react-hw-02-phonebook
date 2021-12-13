@@ -19,7 +19,7 @@ class Input extends Component {
     this.setState({ name: '', number: '' });
   };
 
-  AddNewContact = event => {
+  addNewContact = event => {
     if (
       this.props.contacts.find(
         item => item.name.toLowerCase() === this.state.name.toLowerCase(),
@@ -27,12 +27,12 @@ class Input extends Component {
     ) {
       return window.alert(`${this.state.name} is alredy in contacts`, 5000);
     } else {
-      this.props.addContact(this.RenderContact());
+      this.props.addContact(this.renderContact());
       this.reset();
     }
   };
 
-  RenderContact = () => {
+  renderContact = () => {
     const { name, number } = this.state;
     return { id: nanoid(), name: name, number: number };
   };
@@ -66,7 +66,7 @@ class Input extends Component {
             placeholder="Enter phone number"
           />
         </label>
-        <button className={s.button} type="button" onClick={this.AddNewContact}>
+        <button className={s.button} type="button" onClick={this.addNewContact}>
           Add contact
         </button>
       </form>
