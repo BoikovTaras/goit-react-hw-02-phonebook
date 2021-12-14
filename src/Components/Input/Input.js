@@ -10,7 +10,7 @@ class Input extends Component {
     number: '',
   };
 
-  Contact = event => {
+  contact = event => {
     const { name, value } = event.currentTarget;
     this.setState({ [name]: value });
   };
@@ -50,7 +50,7 @@ class Input extends Component {
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
             title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             required
-            onChange={this.Contact}
+            onChange={this.contact}
             placeholder="Enter name"
           />
           <h3 className={s.title}>Number</h3>
@@ -62,11 +62,11 @@ class Input extends Component {
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
-            onChange={this.Contact}
+            onChange={this.contact}
             placeholder="Enter phone number"
           />
         </label>
-        <button className={s.button} type="button" onClick={this.addNewContact}>
+        <button className={s.button} type="submit" onClick={this.addNewContact}>
           Add contact
         </button>
       </form>
